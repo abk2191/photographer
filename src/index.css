@@ -32,6 +32,7 @@
 }
 
 .each-image {
-  padding: 20px;
+  padding: 21px;
+  border: 1px solid black;
   cursor: pointer;
 }
