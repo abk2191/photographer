@@ -1,0 +1,37 @@
+.upload-photo-button-div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-photo-button {
+  background-color: blue;
+  border: none;
+  height: 100px;
+  width: 350px;
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+  border-radius: 20px;
+  font-family: "Inter", sans-serif;
+  margin-top: 20px;
+  transition: transform 0.2s ease;
+}
+
+.upload-photo-button:active {
+  transform: scale(0.95);
+  background-color: rgb(28, 28, 140);
+}
+
+.display-images-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.each-image {
+  padding: 20px;
+  cursor: pointer;
+}
