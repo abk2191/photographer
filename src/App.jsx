@@ -67,7 +67,7 @@ function App() {
   return (
     <>
       <div className="logo">
-        <h1 style={{ color: "white" }}>My Gallery</h1>
+        <h1 style={{ color: "white" }}>My Web Gallery</h1>
         {/* {selectedImageURL.length > 0 && (
           <button
             onClick={clearAllImages}
