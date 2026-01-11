@@ -5,15 +5,22 @@
   justify-content: center;
 }
 
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Satisfy", cursive;
+}
+
 .upload-photo-button {
   background-color: blue;
   border: none;
-  height: 100px;
-  width: 350px;
+  height: 60px;
+  width: 300px;
   color: white;
-  font-size: 30px;
+  font-size: 50px;
   cursor: pointer;
-  border-radius: 20px;
+  border-radius: 8px;
   font-family: "Inter", sans-serif;
   margin-top: 20px;
   transition: transform 0.2s ease;
@@ -38,4 +45,27 @@
   object-fit: cover; /* Crop to fit without distortion */
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+body {
+  background-color: black;
+}
+
+.image-viewer {
+  height: 450px;
+  width: 300px;
+  background-color: white;
+}
+
+@media (max-width: 768px) {
+  .each-image {
+    height: 100px !important;
+    width: 100px !important;
+  }
+
+  .display-images-div-flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
