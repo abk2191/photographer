@@ -48,7 +48,7 @@
   height: 200px; /* Fixed height or use aspect ratio */
   object-fit: cover; /* Crop to fit without distortion */
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
 body {
