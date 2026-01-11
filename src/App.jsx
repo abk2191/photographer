@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from "react";
-import ImageViewer from "./ImageViewer";
 
 function App() {
   const fileInputRef = useRef(null);
@@ -11,13 +10,11 @@ function App() {
     if (savedImages) {
       try {
         const parsedImages = JSON.parse(savedImages);
-        // Validate that we have valid URLs before setting state
-        if (Array.isArray(parsedImages) && parsedImages.length > 0) {
+        if (Array.isArray(parsedImages)) {
           setSelectedImageURL(parsedImages);
         }
       } catch (error) {
         console.error("Error loading images from localStorage:", error);
-        // Clear corrupted data
         localStorage.removeItem("galleryImages");
       }
     }
@@ -26,40 +23,40 @@ function App() {
   // Save images to localStorage whenever selectedImageURL changes
   useEffect(() => {
     if (selectedImageURL.length > 0) {
-      localStorage.setItem("galleryImages", JSON.stringify(selectedImageURL));
+      localStorage.setItem(
+        "galleryImages",
+        JSON.stringify(selectedImageURL)
+      );
     } else {
-      // If no images, clear the localStorage item
       localStorage.removeItem("galleryImages");
     }
   }, [selectedImageURL]);
 
   const handleButtonClick = () => {
-    fileInputRef.current.click(); // This triggers the file selector
+    fileInputRef.current.click();
   };
 
   const acceptFile = (event) => {
-    const selectedImageFile = event.target.files[0];
+    const file = event.target.files[0];
+    if (!file) return;
 
-    if (selectedImageFile) {
-      const imageURL = URL.createObjectURL(selectedImageFile);
-      setSelectedImageURL((prev) => [...prev, imageURL]);
-    }
+    const reader = new FileReader();
 
-    // Reset the input so the same file can be selected again
+    reader.onloadend = () => {
+      setSelectedImageURL((prev) => [...prev, reader.result]);
+    };
+
+    reader.readAsDataURL(file);
     event.target.value = null;
   };
 
-  // Function to remove an image
   const removeImage = (indexToRemove) => {
     setSelectedImageURL((prev) =>
       prev.filter((_, index) => index !== indexToRemove)
     );
   };
 
-  // Function to clear all images
   const clearAllImages = () => {
-    // Revoke object URLs to prevent memory leaks
-    selectedImageURL.forEach((url) => URL.revokeObjectURL(url));
     setSelectedImageURL([]);
     localStorage.removeItem("galleryImages");
   };
@@ -68,22 +65,6 @@ function App() {
     <>
       <div className="logo">
         <h1 style={{ color: "white" }}>My Web Gallery</h1>
-        {/* {selectedImageURL.length > 0 && (
-          <button
-            onClick={clearAllImages}
-            style={{
-              marginLeft: "20px",
-              padding: "5px 10px",
-              backgroundColor: "#ff4444",
-              color: "white",
-              border: "none",
-              borderRadius: "4px",
-              cursor: "pointer",
-            }}
-          >
-            Clear All
-          </button>
-        )} */}
       </div>
 
       <input
@@ -108,20 +89,21 @@ function App() {
                 <img
                   src={image}
                   alt={`Preview ${index + 1}`}
+                  className="each-image"
                   style={{
                     height: "250px",
                     width: "250px",
                     objectFit: "cover",
                   }}
-                  className="each-image"
                 />
                 <button
                   onClick={() => removeImage(index)}
+                  title="Remove image"
                   style={{
                     position: "absolute",
                     top: "5px",
                     right: "5px",
-                    backgroundColor: "rgba(0, 0, 0, 0.7)",
+                    backgroundColor: "rgba(0,0,0,0.7)",
                     color: "white",
                     border: "none",
                     borderRadius: "50%",
@@ -130,7 +112,6 @@ function App() {
                     cursor: "pointer",
                     fontSize: "14px",
                   }}
-                  title="Remove image"
                 >
                   ×
                 </button>
@@ -143,7 +124,6 @@ function App() {
           )}
         </div>
       </div>
-      {/* <ImageViewer /> */}
     </>
   );
 }
