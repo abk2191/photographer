@@ -24,6 +24,10 @@
   font-family: "Inter", sans-serif;
   margin-top: 20px;
   transition: transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .upload-photo-button:active {
